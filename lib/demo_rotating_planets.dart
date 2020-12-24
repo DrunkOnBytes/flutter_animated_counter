@@ -11,6 +11,9 @@ class RotatingPlanetsCounter{
   RotatingPlanetsCounter({List<Color> initialColors, int initialCounter}){
     _counter = initialCounter;
     _colors = initialColors;
+    for(int i=0; i<_counter; i++){
+      _radii.add(_random.nextInt(20) + 10.0);
+    }
   }
 
   List<Color> _colors;

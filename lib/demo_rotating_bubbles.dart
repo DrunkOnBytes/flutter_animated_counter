@@ -9,6 +9,9 @@ class RotatingBubblesCounter{
   RotatingBubblesCounter({List<Color> initialColors, int initialCounter}){
     _counter = initialCounter;
     _colors = initialColors;
+    for(int i=0; i<_counter; i++){
+      _radii.add(_random.nextInt(25) + 12.5);
+    }
   }
 
   List<Color> _colors;

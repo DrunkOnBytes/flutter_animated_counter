@@ -23,6 +23,10 @@ class CircleWaveCounter{
     );
     _addPointAnimation =
         _addPointController.drive(CurveTween(curve: Curves.ease));
+
+    for(int i=0; i<_counter; i++){
+      _addPointController.forward(from: 0);
+    }
   }
 
   List<Color> _colors;

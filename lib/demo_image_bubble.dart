@@ -9,6 +9,13 @@ class ImageBubbleCounter{
   ImageBubbleCounter({ int initialCounter, String image}){
     _counter = initialCounter;
     _image = image;
+    for(int i=0; i<_counter; i++){
+      _bubbles.add(_ImageBubble(
+        center: Offset(_random.nextDouble(), _random.nextDouble()),
+        radius: (_random.nextInt(50) + 20).toDouble(),
+        image: _image,
+      ));
+    }
   }
 
   int _counter;
