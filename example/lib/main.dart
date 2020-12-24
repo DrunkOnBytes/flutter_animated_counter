@@ -27,6 +27,8 @@ class Demos extends StatefulWidget {
 }
 
 class _DemosState extends State<Demos> with TickerProviderStateMixin{
+  TabController _controller;
+
   BlocksCounter block = BlocksCounter(initialCounter: 0);
   DisksCounter disk = DisksCounter(initialCounter: 0);
   WaveCounter wave = WaveCounter(initialCounter: 0);
@@ -35,7 +37,7 @@ class _DemosState extends State<Demos> with TickerProviderStateMixin{
   RotatingPlanetsCounter plan = RotatingPlanetsCounter(initialCounter: 0, initialColors: [Colors.red, Colors.green, Colors.blue]);
   CreatureCounter cre;
   ImageBubbleCounter imgbub = ImageBubbleCounter(initialCounter: 0, image: 'assets/dash.jpg');
-  PortraitCounter por = PortraitCounter(initialCounter: 5, image: 'assets/mattis.jpeg');
+  PortraitCounter por = PortraitCounter(initialCounter: 0, image: 'assets/mattis.jpeg');
   ParticlesCounter part;
   VolcanoCounter vol = VolcanoCounter(initialCounter: 0, enableSky: true);
 
@@ -50,6 +52,8 @@ class _DemosState extends State<Demos> with TickerProviderStateMixin{
 
   @override
   void initState() {
+    _controller = TabController(length: 11, vsync: this);
+
     circle = CircleWaveCounter(vs: this, initialCounter: 0, initialColors: [Colors.red, Colors.green, Colors.blue]);
     cre = CreatureCounter(vs: this, initialCounter: 0, initialColors: [Colors.red, Colors.green, Colors.blue]);
     part = ParticlesCounter(initialCounter: 0, images: getAssetName());
@@ -59,9 +63,27 @@ class _DemosState extends State<Demos> with TickerProviderStateMixin{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Counter Apps'),
+        title: const Text('Counter Demos'),
+        bottom: TabBar(
+          controller: _controller,
+          isScrollable: true,
+          tabs: [
+            Tab(text: 'Block',),
+            Tab(text: 'Disk',),
+            Tab(text: 'Wave',),
+            Tab(text: 'CircleWave',),
+            Tab(text: 'RotatingBubbles',),
+            Tab(text: 'RotatingPlanets',),
+            Tab(text: 'Creature',),
+            Tab(text: 'ImageBubble',),
+            Tab(text: 'Portrait',),
+            Tab(text: 'Particles',),
+            Tab(text: 'Volcano',),
+          ],
+        ),
       ),
-      body: PageView(
+      body: TabBarView(
+        controller: _controller,
         children: [
           block.build(context),
           disk.build(context),
