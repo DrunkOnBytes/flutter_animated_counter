@@ -1,8 +1,8 @@
 name: animated_counter
-description: A new Flutter package.
-version: 0.0.1
-author:
-homepage:
+description: A package containing awesome animated counters.
+version: 0.0.2
+homepage: https://github.com/RyuuKenshi/flutter_animated_counter
+repository: https://github.com/RyuuKenshi/flutter_animated_counter
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -11,6 +11,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  vector_math: ^2.0.8
 
 dev_dependencies:
   flutter_test:
