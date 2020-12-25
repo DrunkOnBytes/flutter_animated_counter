@@ -3,33 +3,21 @@
 
 A collection of animated counters sourced during the FlutterCounterChallenge2020.
 
-Block                      |        Circle Wave
-:-------------------------:|:-------------------------:
-![](ss/blocks.gif)         |  ![](ss/circle_wave.gif)
+Block                      |        Circle Wave       |     Creature
+:-------------------------:|:-------------------------:-------------------------:
+![](ss/blocks.gif)         |  ![](ss/circle_wave.gif) |![](ss/creatures.gif)
 
-Creature                   |        Disks
-:-------------------------:|:-------------------------:
-![](ss/creatures.gif)       |  ![](ss/disks.gif)
+Image Bubble               |Particles                  |        Portrait
+:-------------------------:|:-------------------------:|:-------------------------:
+![](ss/image_bubble.gif)   |![](ss/particles.gif)      |  ![](ss/portrait.gif)
 
-Image Bubble               |        Mattis
-:-------------------------:|:-------------------------:
-![](ss/image_bubble.gif)   |  ![](ss/mattis.gif)
+Rotating Bubbles           |        Rotating Planets   |        Volcano
+:-------------------------:|:-------------------------:|:-------------------------:
+![](ss/rotating_bubbles.gif) |  ![](ss/rotating_planets.gif)|  ![](ss/volcano.gif)
 
-Particles                  |        Portrait
-:-------------------------:|:-------------------------:
-![](ss/particles.gif)      |  ![](ss/portrait.gif)
-
-Rotating Bubbles           |        Rotating Planets
-:-------------------------:|:-------------------------:
-![](ss/rotating_bubbles.gif) |  ![](ss/rotating_planets.gif)
-
-Triangles                  |        Volcano
-:-------------------------:|:-------------------------:
-![](ss/triangles.gif)      |  ![](ss/volcano.gif)
-
-Wave                       |        Pixel
-:-------------------------:|:-------------------------:
-![](ss/wave.gif)         |  ![](ss/pixel.gif)
+Wave                       |        Pixel             |        Disks
+:-------------------------:|:-------------------------:|:-------------------------:
+![](ss/wave.gif)         |  ![](ss/pixel.gif)         |  ![](ss/disks.gif)
 
 
 ## Features
