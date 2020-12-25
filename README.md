@@ -3,10 +3,6 @@
 
 A collection of animated counters sourced during the FlutterCounterChallenge2020.
 
-Block                      |        Circle Wave       |     Creature
-:-------------------------:|:-------------------------:-------------------------:
-![](ss/blocks.gif)         |  ![](ss/circle_wave.gif) |   ![](ss/creatures.gif)
-
 Block                      | Circle Wave               |        Creatures
 :-------------------------:|:-------------------------:|:-------------------------:
 ![](ss/blocks.gif)         |  ![](ss/circle_wave.gif)  |  ![](ss/creatures.gif)
