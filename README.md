@@ -7,6 +7,10 @@ Block                      |        Circle Wave       |     Creature
 :-------------------------:|:-------------------------:-------------------------:
 ![](ss/blocks.gif)         |  ![](ss/circle_wave.gif) |   ![](ss/creatures.gif)
 
+Block                      | Circle Wave               |        Creatures
+:-------------------------:|:-------------------------:|:-------------------------:
+![](ss/blocks.gif)         |  ![](ss/circle_wave.gif)  |  ![](ss/creatures.gif)
+
 Image Bubble               |Particles                  |        Portrait
 :-------------------------:|:-------------------------:|:-------------------------:
 ![](ss/image_bubble.gif)   |![](ss/particles.gif)      |  ![](ss/portrait.gif)
