@@ -1,14 +1,15 @@
 library animated_counter;
 
-export 'demo_blocks.dart';
-export 'demo_circle_wave.dart';
-export 'demo_creature.dart';
-export 'demo_disks.dart';
-export 'demo_image_bubble.dart';
-export 'demo_particles.dart';
-export 'demo_portrait.dart';
-export 'demo_rotating_bubbles.dart';
-export 'demo_rotating_planets.dart';
-export 'demo_volcano.dart';
-export 'demo_wave.dart';
+export 'blocks_counter.dart';
+export 'circle_wave_counter.dart';
+export 'creature_counter.dart';
+export 'disks_counter.dart';
+export 'image_bubble_counter.dart';
+export 'particles_counter.dart';
+export 'portrait_counter.dart';
+export 'rotating_bubbles_counter.dart';
+export 'rotating_planets_counter.dart';
+export 'volcano_counter.dart';
+export 'wave_counter.dart';
+export 'pixel_counter.dart';
 

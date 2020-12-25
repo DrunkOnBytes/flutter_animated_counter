@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import 'package:animated_counter/animated_counter.dart';
@@ -40,6 +42,7 @@ class _DemosState extends State<Demos> with TickerProviderStateMixin{
   PortraitCounter por = PortraitCounter(initialCounter: 0, image: 'assets/mattis.jpeg');
   ParticlesCounter part;
   VolcanoCounter vol = VolcanoCounter(initialCounter: 0, enableSky: true);
+  PixelCounter pix = PixelCounter(initialCounter: 0);
 
   List<String> getAssetName() {
     List<String> names = List();
@@ -52,7 +55,7 @@ class _DemosState extends State<Demos> with TickerProviderStateMixin{
 
   @override
   void initState() {
-    _controller = TabController(length: 11, vsync: this);
+    _controller = TabController(length: 12, vsync: this);
 
     circle = CircleWaveCounter(vs: this, initialCounter: 0, initialColors: [Colors.red, Colors.green, Colors.blue]);
     cre = CreatureCounter(vs: this, initialCounter: 0, initialColors: [Colors.red, Colors.green, Colors.blue]);
@@ -79,6 +82,7 @@ class _DemosState extends State<Demos> with TickerProviderStateMixin{
             Tab(text: 'Portrait',),
             Tab(text: 'Particles',),
             Tab(text: 'Volcano',),
+            Tab(text: 'Pixel',)
           ],
         ),
       ),
@@ -96,6 +100,7 @@ class _DemosState extends State<Demos> with TickerProviderStateMixin{
           por.build(context),
           part.build(context),
           vol.build(context),
+          pix.build(context),
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -112,6 +117,7 @@ class _DemosState extends State<Demos> with TickerProviderStateMixin{
             por.incrementCounter();
             part.incrementCounter();
             vol.incrementCounter();
+            pix.incrementCounter();
           });
         },
       ),
