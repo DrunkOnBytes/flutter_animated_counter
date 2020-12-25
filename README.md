@@ -36,7 +36,7 @@ Wave                       |        Pixel             |        Disks
 
 ## Live preview
 
-https://ryuukenshi.github.io/animated_counter
+https://arjunsinha.xyz/animated_counter
 
 Note: This page is built with flutter-web, hence the animations may not be smooth. For a better user experience, please run the example app on a mobile device.
 

@@ -1,6 +1,4 @@
 // Credits to https://twitter.com/beesandbombs/status/1329468633723101187?s=20
-
-import 'dart:html';
 import 'dart:math' as math;
 import 'dart:ui';
 

@@ -14,7 +14,9 @@ class PixelCounter {
   }
 
   void decrementCounter() {
-    _counter++;
+    if (_counter > 0) {
+      _counter--;
+    }
   }
 
   int getCounter() {
