@@ -5,19 +5,19 @@ A collection of animated counters sourced during the FlutterCounterChallenge2020
 
 Block                      | Circle Wave               |        Creatures
 :-------------------------:|:-------------------------:|:-------------------------:
-![](ss/blocks.gif)         |  ![](ss/circle_wave.gif)  |  ![](ss/creatures.gif)
+![Block](ss/blocks.gif)    | ![Circle Wave](ss/circle_wave.gif) |  ![](ss/creatures.gif)
 
 Image Bubble               |Particles                  |        Portrait
 :-------------------------:|:-------------------------:|:-------------------------:
-![](ss/image_bubble.gif)   |![](ss/particles.gif)      |  ![](ss/portrait.gif)
+![Image Bubble](ss/image_bubble.gif)   |![Particles](ss/particles.gif)      |  ![Portrait](ss/portrait.gif)
 
 Rotating Bubbles           |        Rotating Planets   |        Volcano
 :-------------------------:|:-------------------------:|:-------------------------:
-![](ss/rotating_bubbles.gif) |  ![](ss/rotating_planets.gif)|  ![](ss/volcano.gif)
+![Rotating Bubbles](ss/rotating_bubbles.gif) |  ![Rotating Planets](ss/rotating_planets.gif)|  ![Volcano](ss/volcano.gif)
 
 Wave                       |        Pixel             |        Disks
 :-------------------------:|:-------------------------:|:-------------------------:
-![](ss/wave.gif)         |  ![](ss/pixel.gif)         |  ![](ss/disks.gif)
+![Wave](ss/wave.gif)         |  ![Pixel](ss/pixel.gif)         |  ![Disks](ss/disks.gif)
 
 
 ## Features
@@ -36,7 +36,7 @@ Wave                       |        Pixel             |        Disks
 
 ## Live preview
 
-https://arjunsinha.xyz/animated_counter
+http://ryuukenshi.github.io/animated_counter
 
 Note: This page is built with flutter-web, hence the animations may not be smooth. For a better user experience, please run the example app on a mobile device.
 
