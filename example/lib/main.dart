@@ -67,42 +67,43 @@ class _DemosState extends State<Demos> with TickerProviderStateMixin{
     return Scaffold(
       appBar: AppBar(
         title: const Text('Counter Demos'),
-        bottom: TabBar(
-          controller: _controller,
-          isScrollable: true,
-          tabs: [
-            Tab(text: 'Block',),
-            Tab(text: 'Disk',),
-            Tab(text: 'Wave',),
-            Tab(text: 'CircleWave',),
-            Tab(text: 'RotatingBubbles',),
-            Tab(text: 'RotatingPlanets',),
-            Tab(text: 'Creature',),
-            Tab(text: 'ImageBubble',),
-            Tab(text: 'Portrait',),
-            Tab(text: 'Particles',),
-            Tab(text: 'Volcano',),
-            Tab(text: 'Pixel',)
-          ],
-        ),
+        // bottom: TabBar(
+        //   controller: _controller,
+        //   isScrollable: true,
+        //   tabs: [
+        //     Tab(text: 'Block',),
+        //     Tab(text: 'Disk',),
+        //     Tab(text: 'Wave',),
+        //     Tab(text: 'CircleWave',),
+        //     Tab(text: 'RotatingBubbles',),
+        //     Tab(text: 'RotatingPlanets',),
+        //     Tab(text: 'Creature',),
+        //     Tab(text: 'ImageBubble',),
+        //     Tab(text: 'Portrait',),
+        //     Tab(text: 'Particles',),
+        //     Tab(text: 'Volcano',),
+        //     Tab(text: 'Pixel',)
+        //   ],
+        // ),
       ),
-      body: TabBarView(
-        controller: _controller,
-        children: [
-          block.build(context),
-          disk.build(context),
-          wave.build(context),
-          circle.build(context),
-          bub.build(context),
-          plan.build(context),
-          cre.build(context),
-          imgbub.build(context),
-          por.build(context),
-          part.build(context),
-          vol.build(context),
-          pix.build(context),
-        ],
-      ),
+      // body: TabBarView(
+      //   controller: _controller,
+      //   children: [
+      //     block.build(context),
+      //     disk.build(context),
+      //     wave.build(context),
+      //     circle.build(context),
+      //     bub.build(context),
+      //     plan.build(context),
+      //     cre.build(context),
+      //     imgbub.build(context),
+      //     por.build(context),
+      //     part.build(context),
+      //     vol.build(context),
+      //     pix.build(context),
+      //   ],
+      // ),
+      body: pix.build(context),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
           setState(() {
