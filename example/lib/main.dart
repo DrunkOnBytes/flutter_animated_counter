@@ -68,12 +68,12 @@ class _DemosState extends State<Demos> with TickerProviderStateMixin {
     _controller = TabController(length: 12, vsync: this);
 
     circle = CircleWaveCounter(
-        vs: this,
+        vsync: this,
         initialCounter: 0,
         initialColors: [Colors.red, Colors.green, Colors.blue],
         blend: BlendMode.lighten);
     cre = CreatureCounter(
-        vs: this,
+        vsync: this,
         initialCounter: 0,
         initialColors: [Colors.red, Colors.green, Colors.blue]);
     part = ParticlesCounter(initialCounter: 0, images: getAssetName());

@@ -71,8 +71,8 @@ First create the object of the Animated Counter you wish to use. Then use its `b
 
   @override
     void initState() {
-      circle = CircleWaveCounter(vs: this, initialCounter: 0, initialColors: [Colors.red, Colors.green, Colors.blue]);
-      cre = CreatureCounter(vs: this, initialCounter: 0, initialColors: [Colors.red, Colors.green, Colors.blue]);
+      circle = CircleWaveCounter(vsync: this, initialCounter: 0, initialColors: [Colors.red, Colors.green, Colors.blue]);
+      cre = CreatureCounter(vsync: this, initialCounter: 0, initialColors: [Colors.red, Colors.green, Colors.blue]);
       part = ParticlesCounter(initialCounter: 0, images: getAssetName());
       super.initState();
     }

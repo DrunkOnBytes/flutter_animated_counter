@@ -9,7 +9,7 @@ import 'common.dart';
 
 class CreatureCounter {
   CreatureCounter(
-      {@required TickerProvider vs,
+      {@required TickerProvider vsync,
       @required List<Color> initialColors,
       @required int initialCounter,
       BlendMode blend = BlendMode.hardLight}) {
@@ -18,12 +18,12 @@ class CreatureCounter {
     _blend = blend;
 
     _controller = AnimationController(
-      vsync: vs,
+      vsync: vsync,
       upperBound: 2,
       duration: const Duration(seconds: 10),
     )..repeat();
     _addPointController = AnimationController(
-      vsync: vs,
+      vsync: vsync,
       duration: const Duration(milliseconds: 500),
     );
     _addPointAnimation =
