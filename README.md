@@ -9,7 +9,7 @@ Block                      |        Circle Wave
 
 Creature                   |        Disks
 :-------------------------:|:-------------------------:
-![](ss/creature.gif)       |  ![](ss/disks.gif)
+![](ss/creatures.gif)       |  ![](ss/disks.gif)
 
 Image Bubble               |        Mattis
 :-------------------------:|:-------------------------:
