@@ -3,12 +3,19 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class DisksCounter {
-  DisksCounter({@required int initialCounter}) {
+  DisksCounter(
+      {@required int initialCounter,
+      Color color = Colors.white,
+      BlendMode blend = BlendMode.difference}) {
     _counter = initialCounter;
+    _color = color;
+    _blend = blend;
   }
 
   final Random _random = Random();
   int _counter;
+  Color _color;
+  BlendMode _blend;
 
   void incrementCounter() {
     _counter++;
@@ -29,7 +36,11 @@ class DisksCounter {
       children: [
         for (int i = 0; i < _counter; i++)
           Positioned.fill(
-            child: _Disk(random: _random),
+            child: _Disk(
+              random: _random,
+              color: _color,
+              blend: _blend,
+            ),
           ),
       ],
     );
@@ -39,10 +50,14 @@ class DisksCounter {
 class _Disk extends StatefulWidget {
   const _Disk({
     Key key,
+    this.color,
+    this.blend,
     @required this.random,
   }) : super(key: key);
 
   final Random random;
+  final Color color;
+  final BlendMode blend;
 
   @override
   __DiskState createState() => __DiskState();
@@ -90,7 +105,8 @@ class __DiskState extends State<_Disk> with SingleTickerProviderStateMixin {
       curve: Curves.elasticOut,
       builder: (_, double effectiveRadius, __) {
         return CustomPaint(
-          painter: _DiskPainter(controller, centerTween, effectiveRadius),
+          painter: _DiskPainter(controller, centerTween, effectiveRadius,
+              widget.color, widget.blend),
         );
       },
     );
@@ -117,11 +133,15 @@ class _DiskPainter extends CustomPainter {
     this.animation,
     this.centerTween,
     this.radius,
+    this.color,
+    this.blend,
   ) : super(repaint: animation);
 
   final Animation<double> animation;
   final double radius;
   final CenterTween centerTween;
+  final Color color;
+  final BlendMode blend;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -138,15 +158,15 @@ class _DiskPainter extends CustomPainter {
       center,
       radius,
       Paint()
-        ..color = Colors.white
-        ..blendMode = BlendMode.difference,
+        ..color = color
+        ..blendMode = blend,
     );
     canvas.drawCircle(
       center + translation,
       radius,
       Paint()
-        ..color = Colors.white
-        ..blendMode = BlendMode.difference,
+        ..color = color
+        ..blendMode = blend,
     );
   }
 

@@ -7,10 +7,15 @@ import 'package:flutter/material.dart';
 
 import 'common.dart';
 
-class CreatureCounter{
-  CreatureCounter({TickerProvider vs, List<Color> initialColors, int initialCounter}){
+class CreatureCounter {
+  CreatureCounter(
+      {@required TickerProvider vs,
+      @required List<Color> initialColors,
+      @required int initialCounter,
+      BlendMode blend = BlendMode.hardLight}) {
     _counter = initialCounter;
     _colors = initialColors;
+    _blend = blend;
 
     _controller = AnimationController(
       vsync: vs,
@@ -27,23 +32,25 @@ class CreatureCounter{
 
   List<Color> _colors;
   int _counter;
+  BlendMode _blend;
 
   AnimationController _controller;
   AnimationController _addPointController;
   Animation<double> _addPointAnimation;
 
   void incrementCounter() {
-      _counter++;
-      _addPointController.forward(from: 0);
+    _counter++;
+    _addPointController.forward(from: 0);
   }
+
   void decrementCounter() {
-    if(_counter>0){
+    if (_counter > 0) {
       _counter--;
       _addPointController.forward(from: 0);
     }
   }
 
-  int getCounter(){
+  int getCounter() {
     return _counter;
   }
 
@@ -64,6 +71,7 @@ class CreatureCounter{
                     i,
                     _colors[i % _colors.length].withOpacity(opacity),
                     _counter,
+                    _blend,
                   ),
                 );
               },
@@ -81,12 +89,14 @@ class _CreaturePainter extends CustomPainter {
     this.index,
     this.color,
     this.count,
+    this.blend,
   ) : super(repaint: animation);
   final Animation<double> animation;
   final Animation<double> addAnimation;
   final int index;
   final Color color;
   final int count;
+  final BlendMode blend;
 
   static const twoPi = math.pi * 2;
   final n = 300;
@@ -128,7 +138,7 @@ class _CreaturePainter extends CustomPainter {
     canvas.drawPath(
       path,
       Paint()
-        ..blendMode = BlendMode.hardLight
+        ..blendMode = blend
         ..color = color
         ..strokeWidth = 5
         ..style = PaintingStyle.stroke

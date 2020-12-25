@@ -3,13 +3,11 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-import 'common.dart';
-
-class ImageBubbleCounter{
-  ImageBubbleCounter({ int initialCounter, String image}){
+class ImageBubbleCounter {
+  ImageBubbleCounter({@required int initialCounter, @required String image}) {
     _counter = initialCounter;
     _image = image;
-    for(int i=0; i<_counter; i++){
+    for (int i = 0; i < _counter; i++) {
       _bubbles.add(_ImageBubble(
         center: Offset(_random.nextDouble(), _random.nextDouble()),
         radius: (_random.nextInt(50) + 20).toDouble(),
@@ -26,22 +24,24 @@ class ImageBubbleCounter{
 
   void incrementCounter() {
     _counter++;
-      _bubbles.add(_ImageBubble(
-        center: Offset(_random.nextDouble(), _random.nextDouble()),
-        radius: (_random.nextInt(50) + 20).toDouble(),
-        image: _image,
-      ));
+    _bubbles.add(_ImageBubble(
+      center: Offset(_random.nextDouble(), _random.nextDouble()),
+      radius: (_random.nextInt(50) + 20).toDouble(),
+      image: _image,
+    ));
   }
+
   void decrementCounter() {
-    if(_counter>0){
+    if (_counter > 0) {
       _counter--;
       _bubbles.removeLast();
     }
   }
 
-  int getCounter(){
+  int getCounter() {
     return _counter;
   }
+
   Widget build(BuildContext context) {
     return Stack(
       children: [

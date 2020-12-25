@@ -17,7 +17,8 @@ const speed = 1;
 const touchSize = 100;
 
 class ParticlesCounter {
-  ParticlesCounter({int initialCounter, List<String> images}){
+  ParticlesCounter(
+      {@required int initialCounter, @required List<String> images}) {
     _counter = initialCounter;
     _images = images;
   }
@@ -26,14 +27,16 @@ class ParticlesCounter {
   List<String> _images;
 
   void incrementCounter() {
-      _counter++;
+    _counter++;
   }
+
   void decrementCounter() {
-    if(_counter>0){
+    if (_counter > 0) {
       _counter--;
     }
   }
-  int getCounter(){
+
+  int getCounter() {
     return _counter;
   }
 
@@ -98,7 +101,8 @@ class __ParticleImageSwitcher extends StatefulWidget {
   final Size size;
 
   @override
-  ___ParticleImageSwitcherState createState() => ___ParticleImageSwitcherState();
+  ___ParticleImageSwitcherState createState() =>
+      ___ParticleImageSwitcherState();
 }
 
 class ___ParticleImageSwitcherState extends State<__ParticleImageSwitcher>

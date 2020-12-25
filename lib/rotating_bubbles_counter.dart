@@ -1,35 +1,42 @@
+import 'dart:html';
 import 'dart:math' as math;
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-import 'common.dart';
-
-class RotatingBubblesCounter{
-  RotatingBubblesCounter({List<Color> initialColors, int initialCounter}){
+class RotatingBubblesCounter {
+  RotatingBubblesCounter(
+      {@required List<Color> initialColors,
+      @required int initialCounter,
+      BlendMode blend = BlendMode.hardLight}) {
     _counter = initialCounter;
     _colors = initialColors;
-    for(int i=0; i<_counter; i++){
+    _blend = blend;
+
+    for (int i = 0; i < _counter; i++) {
       _radii.add(_random.nextInt(25) + 12.5);
     }
   }
 
   List<Color> _colors;
   int _counter;
+  BlendMode _blend;
   final math.Random _random = math.Random();
   final List<double> _radii = <double>[];
 
   void incrementCounter() {
     _counter++;
-      _radii.add(_random.nextInt(25) + 12.5);
+    _radii.add(_random.nextInt(25) + 12.5);
   }
+
   void decrementCounter() {
-    if(_counter>0){
+    if (_counter > 0) {
       _counter--;
       _radii.removeLast();
     }
   }
-  int getCounter(){
+
+  int getCounter() {
     return _counter;
   }
 
@@ -47,6 +54,7 @@ class RotatingBubblesCounter{
                   random: _random,
                   radius: radius,
                   color: _colors[i % _colors.length],
+                  blend: _blend,
                 );
               },
             ),
@@ -62,11 +70,13 @@ class _RotatingBubble extends StatefulWidget {
     @required this.random,
     @required this.radius,
     @required this.color,
+    @required this.blend,
   }) : super(key: key);
 
   final math.Random random;
   final double radius;
   final Color color;
+  final BlendMode blend;
 
   @override
   __RotatingBubbleState createState() => __RotatingBubbleState();
@@ -104,7 +114,8 @@ class __RotatingBubbleState extends State<_RotatingBubble>
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
-      painter: _RotatingBubblePainter(angle, shift, widget.radius, widget.color),
+      painter: _RotatingBubblePainter(
+          angle, shift, widget.radius, widget.color, widget.blend),
     );
   }
 }
@@ -115,12 +126,14 @@ class _RotatingBubblePainter extends CustomPainter {
     this.shift,
     this.radius,
     this.color,
+    this.blend,
   ) : super(repaint: angle);
 
   final Animation<double> angle;
   final double shift;
   final double radius;
   final Color color;
+  final BlendMode blend;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -132,7 +145,7 @@ class _RotatingBubblePainter extends CustomPainter {
       center,
       radius,
       Paint()
-        ..blendMode = BlendMode.hardLight
+        ..blendMode = blend
         ..color = color,
     );
   }

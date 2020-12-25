@@ -7,10 +7,15 @@ import 'package:flutter/material.dart';
 
 import 'common.dart';
 
-class CircleWaveCounter{
-  CircleWaveCounter({TickerProvider vs, List<Color> initialColors, int initialCounter}){
+class CircleWaveCounter {
+  CircleWaveCounter(
+      {@required TickerProvider vs,
+      @required List<Color> initialColors,
+      @required int initialCounter,
+      BlendMode blend = BlendMode.hardLight}) {
     _counter = initialCounter;
     _colors = initialColors;
+    _blend = blend;
 
     _controller = AnimationController(
       vsync: vs,
@@ -24,7 +29,7 @@ class CircleWaveCounter{
     _addPointAnimation =
         _addPointController.drive(CurveTween(curve: Curves.ease));
 
-    for(int i=0; i<_counter; i++){
+    for (int i = 0; i < _counter; i++) {
       _addPointController.forward(from: 0);
     }
   }
@@ -34,20 +39,21 @@ class CircleWaveCounter{
   AnimationController _addPointController;
   Animation<double> _addPointAnimation;
   int _counter;
+  BlendMode _blend;
 
   void incrementCounter() {
-      _counter++;
-      _addPointController.forward(from: 0);
+    _counter++;
+    _addPointController.forward(from: 0);
   }
 
   void decrementCounter() {
-    if(_counter>0){
+    if (_counter > 0) {
       _counter--;
       _addPointController.forward(from: 0);
     }
   }
 
-  int getCounter(){
+  int getCounter() {
     return _counter;
   }
 
@@ -68,6 +74,7 @@ class CircleWaveCounter{
                     i,
                     _colors[i].withOpacity(opacity),
                     _counter,
+                    _blend,
                   ),
                 );
               },
@@ -80,17 +87,19 @@ class CircleWaveCounter{
 
 class _CircleWavePainter extends CustomPainter {
   _CircleWavePainter(
-      this.animation,
-      this.addAnimation,
-      this.index,
-      this.color,
-      this.count,
-      ) : super(repaint: animation);
+    this.animation,
+    this.addAnimation,
+    this.index,
+    this.color,
+    this.count,
+    this.blend,
+  ) : super(repaint: animation);
   final Animation<double> animation;
   final Animation<double> addAnimation;
   final int index;
   final Color color;
   final int count;
+  final BlendMode blend;
 
   static const halfPi = math.pi / 2;
   static const twoPi = math.pi * 2;
@@ -135,7 +144,7 @@ class _CircleWavePainter extends CustomPainter {
     canvas.drawPath(
       path,
       Paint()
-        ..blendMode = BlendMode.hardLight
+        ..blendMode = blend
         ..color = color
         ..strokeWidth = 8
         ..style = PaintingStyle.stroke,

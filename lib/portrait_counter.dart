@@ -10,7 +10,7 @@ import 'package:flutter/services.dart';
 import 'common.dart';
 
 class PortraitCounter {
-  PortraitCounter({int initialCounter, String image}){
+  PortraitCounter({@required int initialCounter, @required String image}) {
     _counter = initialCounter;
     _image = image;
   }
@@ -18,14 +18,16 @@ class PortraitCounter {
   int _counter;
   String _image;
   void incrementCounter() {
-      _counter++;
+    _counter++;
   }
+
   void decrementCounter() {
-    if(_counter>0){
+    if (_counter > 0) {
       _counter--;
     }
   }
-  int getCounter(){
+
+  int getCounter() {
     return _counter;
   }
 

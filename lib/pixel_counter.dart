@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
 
-class PixelCounter{
-  PixelCounter({int initialCounter}){
+class PixelCounter {
+  PixelCounter({@required int initialCounter, Color color = Colors.yellow}) {
     _counter = initialCounter;
+    _color = color;
   }
   List numberOfBlocks = List();
   int _counter;
-  final yellowish = Color(0xffFFE45E);
+  Color _color;
 
-  void incrementCounter(){
+  void incrementCounter() {
     _counter++;
   }
-  void decrementCounter(){
+
+  void decrementCounter() {
     _counter++;
   }
-  int getCounter(){
+
+  int getCounter() {
     return _counter;
   }
 
@@ -60,7 +63,7 @@ class PixelCounter{
                 duration: Duration(milliseconds: index * 140),
                 clipBehavior: Clip.antiAlias,
                 decoration: BoxDecoration(
-                  color: kaza.contains(index) ? Colors.black : yellowish,
+                  color: kaza.contains(index) ? Colors.black : _color,
                   boxShadow: [
                     BoxShadow(
                       blurRadius: 2,
@@ -69,7 +72,7 @@ class PixelCounter{
                     ),
                   ],
                   border: Border.all(
-                    color: kaza.contains(index) ? yellowish : Colors.black,
+                    color: kaza.contains(index) ? _color : Colors.black,
                     width: 0.3,
                     style: BorderStyle.solid,
                   ),
@@ -78,7 +81,7 @@ class PixelCounter{
           ],
           addAutomaticKeepAlives: false,
           gridDelegate:
-          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
         ),
       ),
     );

@@ -8,8 +8,11 @@ import 'package:flutter/material.dart';
 
 import 'common.dart';
 
-class VolcanoCounter{
-  VolcanoCounter({int initialCounter, bool enableSky = false, bool enableGrass = false}){
+class VolcanoCounter {
+  VolcanoCounter(
+      {@required int initialCounter,
+      bool enableSky = false,
+      bool enableGrass = false}) {
     _counter = initialCounter;
     _enableGrass = enableGrass;
     _enableSky = enableSky;
@@ -20,27 +23,28 @@ class VolcanoCounter{
   bool _enableGrass;
 
   void incrementCounter() {
-      _counter++;
+    _counter++;
   }
+
   void decrementCounter() {
-    if(_counter>0){
+    if (_counter > 0) {
       _counter--;
     }
   }
-  int getCounter(){
+
+  int getCounter() {
     return _counter;
   }
-
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       fit: StackFit.expand,
       children: [
-        if(_enableSky)const Sky(),
+        if (_enableSky) const Sky(),
         for (int i = 0; i < _counter; i++) _Eruption(count: i + 1),
         Volcano(),
-        if(_enableGrass)const Grass(),
+        if (_enableGrass) const Grass(),
       ],
     );
   }
@@ -321,7 +325,8 @@ class Volcano extends StatelessWidget {
       bottom: 0,
       left: 0,
       right: 0,
-      child: Image.network('https://raw.githubusercontent.com/RyuuKenshi/flutter_animated_counter/main/volcano.png'),
+      child: Image.network(
+          'https://raw.githubusercontent.com/RyuuKenshi/flutter_animated_counter/main/volcano.png'),
     );
   }
 }

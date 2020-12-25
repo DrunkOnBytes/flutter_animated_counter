@@ -2,14 +2,14 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
-import 'common.dart';
-
 class WaveCounter {
-  WaveCounter({@required int initialCounter}) {
+  WaveCounter({@required int initialCounter, Color color = Colors.black}) {
     _counter = initialCounter;
+    _color = color;
   }
 
   int _counter;
+  Color _color;
 
   void incrementCounter() {
     _counter++;
@@ -37,8 +37,10 @@ class WaveCounter {
               return FractionallySizedBox(
                 heightFactor: (ratio / 100).clamp(0, 100).toDouble(),
                 alignment: Alignment.bottomCenter,
-                child: const _Wave(
-                  child: DifferenceMask(),
+                child: _Wave(
+                  child: DifferenceMask(
+                    color: _color,
+                  ),
                 ),
               );
             },
@@ -139,22 +141,25 @@ class _WaveClipper extends CustomClipper<Path> {
 class DifferenceMask extends StatelessWidget {
   const DifferenceMask({
     Key key,
+    this.color,
   }) : super(key: key);
 
+  final color;
   @override
   Widget build(BuildContext context) {
-    return const CustomPaint(
-      painter: DifferencePainter(),
+    return CustomPaint(
+      painter: DifferencePainter(color: color),
     );
   }
 }
 
 class DifferencePainter extends CustomPainter {
-  const DifferencePainter() : super();
+  const DifferencePainter({@required this.color}) : super();
 
+  final color;
   @override
   void paint(Canvas canvas, Size size) {
-    canvas.drawRect(Offset.zero & size, Paint()..color = Colors.black);
+    canvas.drawRect(Offset.zero & size, Paint()..color = color);
   }
 
   @override

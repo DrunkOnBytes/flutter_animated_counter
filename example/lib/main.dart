@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(primarySwatch: Colors.blue),
       home: Demos(),
@@ -31,9 +32,9 @@ class Demos extends StatefulWidget {
 class _DemosState extends State<Demos> with TickerProviderStateMixin{
   TabController _controller;
 
-  BlocksCounter block = BlocksCounter(initialCounter: 0);
-  DisksCounter disk = DisksCounter(initialCounter: 0);
-  WaveCounter wave = WaveCounter(initialCounter: 0);
+  BlocksCounter block = BlocksCounter(initialCounter: 0, color: Colors.red);
+  DisksCounter disk = DisksCounter(initialCounter: 0, color: Colors.blue);
+  WaveCounter wave = WaveCounter(initialCounter: 0, color: Colors.orange);
   CircleWaveCounter circle;
   RotatingBubblesCounter bub = RotatingBubblesCounter(initialCounter: 0, initialColors: [Colors.red, Colors.green, Colors.blue]);
   RotatingPlanetsCounter plan = RotatingPlanetsCounter(initialCounter: 0, initialColors: [Colors.red, Colors.green, Colors.blue]);
@@ -42,7 +43,7 @@ class _DemosState extends State<Demos> with TickerProviderStateMixin{
   PortraitCounter por = PortraitCounter(initialCounter: 0, image: 'assets/mattis.jpeg');
   ParticlesCounter part;
   VolcanoCounter vol = VolcanoCounter(initialCounter: 0, enableSky: true);
-  PixelCounter pix = PixelCounter(initialCounter: 0);
+  PixelCounter pix = PixelCounter(initialCounter: 0, color: Colors.cyan);
 
   List<String> getAssetName() {
     List<String> names = List();
@@ -67,44 +68,44 @@ class _DemosState extends State<Demos> with TickerProviderStateMixin{
     return Scaffold(
       appBar: AppBar(
         title: const Text('Counter Demos'),
-        // bottom: TabBar(
-        //   controller: _controller,
-        //   isScrollable: true,
-        //   tabs: [
-        //     Tab(text: 'Block',),
-        //     Tab(text: 'Disk',),
-        //     Tab(text: 'Wave',),
-        //     Tab(text: 'CircleWave',),
-        //     Tab(text: 'RotatingBubbles',),
-        //     Tab(text: 'RotatingPlanets',),
-        //     Tab(text: 'Creature',),
-        //     Tab(text: 'ImageBubble',),
-        //     Tab(text: 'Portrait',),
-        //     Tab(text: 'Particles',),
-        //     Tab(text: 'Volcano',),
-        //     Tab(text: 'Pixel',)
-        //   ],
-        // ),
+        bottom: TabBar(
+          controller: _controller,
+          isScrollable: true,
+          tabs: [
+            Tab(text: 'Block',),
+            Tab(text: 'Disk',),
+            Tab(text: 'Wave',),
+            Tab(text: 'CircleWave',),
+            Tab(text: 'RotatingBubbles',),
+            Tab(text: 'RotatingPlanets',),
+            Tab(text: 'Creature',),
+            Tab(text: 'ImageBubble',),
+            Tab(text: 'Portrait',),
+            Tab(text: 'Particles',),
+            Tab(text: 'Volcano',),
+            Tab(text: 'Pixel',)
+          ],
+        ),
       ),
-      // body: TabBarView(
-      //   controller: _controller,
-      //   children: [
-      //     block.build(context),
-      //     disk.build(context),
-      //     wave.build(context),
-      //     circle.build(context),
-      //     bub.build(context),
-      //     plan.build(context),
-      //     cre.build(context),
-      //     imgbub.build(context),
-      //     por.build(context),
-      //     part.build(context),
-      //     vol.build(context),
-      //     pix.build(context),
-      //   ],
-      // ),
-      body: pix.build(context),
+      body: TabBarView(
+        controller: _controller,
+        children: [
+          block.build(context),
+          disk.build(context),
+          wave.build(context),
+          circle.build(context),
+          bub.build(context),
+          plan.build(context),
+          cre.build(context),
+          imgbub.build(context),
+          por.build(context),
+          part.build(context),
+          vol.build(context),
+          pix.build(context),
+        ],
+      ),
       floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
         onPressed: (){
           setState(() {
             block.incrementCounter();
