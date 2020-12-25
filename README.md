@@ -73,10 +73,11 @@ First create the object of the Animated Counter you wish to use. Then use its `b
     void initState() {
       circle = CircleWaveCounter(vsync: this, initialCounter: 0, initialColors: [Colors.red, Colors.green, Colors.blue]);
       cre = CreatureCounter(vsync: this, initialCounter: 0, initialColors: [Colors.red, Colors.green, Colors.blue]);
-      part = ParticlesCounter(initialCounter: 0, images: getAssetName());
+      part = ParticlesCounter(initialCounter: 0, images: ['image1.jpg', 'image2.jpg', 'image3.jpg', 'image4.jpg', 'image5.jpg']);
       super.initState();
     }
 ```
+`CircleWaveCounter()` and `CreatureCounter()` require a vsync hence the parent class needs to extend `TickerProviderStateMixin` to use these counters.
 
 ### Use it in widget tree using `build()` method. Control it using the `incrementCounter()`, `decrementCounter()` and `getCounter()` methods.
 
