@@ -42,7 +42,7 @@ Note: This page is built with flutter-web, hence the animations may not be smoot
 
 ## Installation
 
-Add `animated_counter: 0.0.6` to your `pubspec.yaml` dependencies. And import it:
+Add `animated_counter: 0.0.7` to your `pubspec.yaml` dependencies. And import it:
 
 ```dart
 import 'package:collapsible_sidebar/collapsible_sidebar.dart';
@@ -127,3 +127,9 @@ First create the object of the Animated Counter you wish to use. Then use its `b
 --------------------------------------------------------------
 
 Apache 2.0
+
+## Credits
+----------------------------------------------------------
+This package was made with code open-sourced by the following awesome devs.
+[Romain Rastel](https://github.com/letsar)
+[Mahmoud Ashour](https://github.com/MeitanteiAshour)
