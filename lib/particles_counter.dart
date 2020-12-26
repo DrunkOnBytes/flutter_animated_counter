@@ -40,7 +40,6 @@ class ParticlesCounter {
     return _counter;
   }
 
-  @override
   Widget build(BuildContext context) {
     return Stack(
       fit: StackFit.expand,
@@ -122,14 +121,14 @@ class ___ParticleImageSwitcherState extends State<__ParticleImageSwitcher>
     for (var i = 0; i < widget.imagePaths.length; i++) {
       allPixels.add(loadPixels(widget.imagePaths[i]));
     }
-    show_Particles(0);
+    showParticles(0);
   }
 
   @override
   void didUpdateWidget(covariant __ParticleImageSwitcher oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.imageIndex != widget.imageIndex) {
-      show_Particles(widget.imageIndex);
+      showParticles(widget.imageIndex);
     }
   }
 
@@ -160,7 +159,7 @@ class ___ParticleImageSwitcherState extends State<__ParticleImageSwitcher>
     );
   }
 
-  Future<void> show_Particles(int index) async {
+  Future<void> showParticles(int index) async {
     final pixels = await allPixels[index];
     final particleIndices = List<int>.generate(particles.length, (i) => i);
     final width = widget.size.width;

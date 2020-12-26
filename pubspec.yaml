@@ -1,5 +1,5 @@
 name: animated_counter
-description: A package containing awesome animated counters including block counter, circle wave counter, creature counter, disks counter, image bubble counter, particles counter, pixel counter, portrait counter, rotating bubbles counter, rotating planets counter, volcano counter and wave counter.
+description: A package containing awesome animated counters to enhance your application with custom counter widgets.
 version: 0.0.3
 homepage: https://github.com/RyuuKenshi/flutter_animated_counter
 repository: https://github.com/RyuuKenshi/flutter_animated_counter
