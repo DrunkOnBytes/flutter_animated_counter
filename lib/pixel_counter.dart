@@ -5,7 +5,7 @@ class PixelCounter {
     _counter = initialCounter;
     _color = color;
   }
-  List numberOfBlocks = List();
+  List<int> numberOfBlocks = List();
   int _counter;
   Color _color;
 

@@ -5,7 +5,7 @@ A collection of animated counters sourced during the FlutterCounterChallenge2020
 
 Block                      | Circle Wave               |        Creatures
 :-------------------------:|:-------------------------:|:-------------------------:
-![Block](ss/blocks.gif)    | ![Circle Wave](ss/circle_wave.gif) |  ![](ss/creatures.gif)
+![Block](ss/blocks.gif)    | ![Circle Wave](ss/circle_wave.gif) |  ![Creatures](ss/creatures.gif)
 
 Image Bubble               |Particles                  |        Portrait
 :-------------------------:|:-------------------------:|:-------------------------:
