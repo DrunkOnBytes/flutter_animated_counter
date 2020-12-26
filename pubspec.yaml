@@ -1,6 +1,6 @@
 name: animated_counter
 description: A package containing awesome animated counters to enhance your application with custom counter widgets.
-version: 0.0.5
+version: 0.0.6
 homepage: https://github.com/RyuuKenshi/flutter_animated_counter
 repository: https://github.com/RyuuKenshi/flutter_animated_counter
 

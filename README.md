@@ -42,7 +42,7 @@ Note: This page is built with flutter-web, hence the animations may not be smoot
 
 ## Installation
 
-Add `animated_counter: 0.0.5` to your `pubspec.yaml` dependencies. And import it:
+Add `animated_counter: 0.0.6` to your `pubspec.yaml` dependencies. And import it:
 
 ```dart
 import 'package:collapsible_sidebar/collapsible_sidebar.dart';
