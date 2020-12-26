@@ -3,21 +3,23 @@
 
 A collection of animated counters sourced during the FlutterCounterChallenge2020.
 
+![Block](ss/blocks.gif)
+
 Block                      | Circle Wave               |        Creatures
 :-------------------------:|:-------------------------:|:-------------------------:
-![Block](ss/blocks.gif)    | ![Circle Wave](ss/circle_wave.gif) |  ![Creatures](ss/creatures.gif)
+![Block](https://raw.githubusercontent.com/RyuuKenshi/flutter_animated_counter/main/ss/blocks.gif)    | ![Circle Wave](https://raw.githubusercontent.com/RyuuKenshi/flutter_animated_counter/main/ss/circle_wave.gif) |  ![Creatures](https://raw.githubusercontent.com/RyuuKenshi/flutter_animated_counter/main/ss/creatures.gif)
 
 Image Bubble               |Particles                  |        Portrait
 :-------------------------:|:-------------------------:|:-------------------------:
-![Image Bubble](ss/image_bubble.gif)   |![Particles](ss/particles.gif)      |  ![Portrait](ss/portrait.gif)
+![Image Bubble](https://raw.githubusercontent.com/RyuuKenshi/flutter_animated_counter/main/ss/image_bubble.gif)   |![Particles](https://raw.githubusercontent.com/RyuuKenshi/flutter_animated_counter/main/ss/particles.gif)      |  ![Portrait](https://raw.githubusercontent.com/RyuuKenshi/flutter_animated_counter/main/ss/portrait.gif)
 
 Rotating Bubbles           |        Rotating Planets   |        Volcano
 :-------------------------:|:-------------------------:|:-------------------------:
-![Rotating Bubbles](ss/rotating_bubbles.gif) |  ![Rotating Planets](ss/rotating_planets.gif)|  ![Volcano](ss/volcano.gif)
+![Rotating Bubbles](https://raw.githubusercontent.com/RyuuKenshi/flutter_animated_counter/main/ss/rotating_bubbles.gif) |  ![Rotating Planets](https://raw.githubusercontent.com/RyuuKenshi/flutter_animated_counter/main/ss/rotating_planets.gif)|  ![Volcano](https://raw.githubusercontent.com/RyuuKenshi/flutter_animated_counter/main/ss/volcano.gif)
 
 Wave                       |        Pixel             |        Disks
 :-------------------------:|:-------------------------:|:-------------------------:
-![Wave](ss/wave.gif)         |  ![Pixel](ss/pixel.gif)         |  ![Disks](ss/disks.gif)
+![Wave](https://raw.githubusercontent.com/RyuuKenshi/flutter_animated_counter/main/ss/wave.gif)         |  ![Pixel](https://raw.githubusercontent.com/RyuuKenshi/flutter_animated_counter/main/ss/pixel.gif)         |  ![Disks](https://raw.githubusercontent.com/RyuuKenshi/flutter_animated_counter/main/ss/disks.gif)
 
 
 ## Features
@@ -42,7 +44,7 @@ Note: This page is built with flutter-web, hence the animations may not be smoot
 
 ## Installation
 
-Add `animated_counter: 1.0.0` to your `pubspec.yaml` dependencies. And import it:
+Add `animated_counter: 0.0.5` to your `pubspec.yaml` dependencies. And import it:
 
 ```dart
 import 'package:collapsible_sidebar/collapsible_sidebar.dart';
