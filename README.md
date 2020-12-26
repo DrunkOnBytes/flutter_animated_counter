@@ -3,8 +3,6 @@
 
 A collection of animated counters sourced during the FlutterCounterChallenge2020.
 
-![Block](ss/blocks.gif)
-
 Block                      | Circle Wave               |        Creatures
 :-------------------------:|:-------------------------:|:-------------------------:
 ![Block](https://raw.githubusercontent.com/RyuuKenshi/flutter_animated_counter/main/ss/blocks.gif)    | ![Circle Wave](https://raw.githubusercontent.com/RyuuKenshi/flutter_animated_counter/main/ss/circle_wave.gif) |  ![Creatures](https://raw.githubusercontent.com/RyuuKenshi/flutter_animated_counter/main/ss/creatures.gif)
