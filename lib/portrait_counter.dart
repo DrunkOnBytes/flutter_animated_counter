@@ -31,7 +31,6 @@ class PortraitCounter {
     return _counter;
   }
 
-  @override
   Widget build(BuildContext context) {
     return Stack(
       fit: StackFit.expand,

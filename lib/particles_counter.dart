@@ -179,22 +179,22 @@ class ___ParticleImageSwitcherState extends State<__ParticleImageSwitcher>
         }
 
         final pixelColor = pixels.getColorAt(x, y);
-        _Particle new_Particle;
+        _Particle newParticle;
         if (particleIndices.isNotEmpty) {
           // Re-use existing particles.
           final index = particleIndices.length == 1
               ? particleIndices.removeAt(0)
               : particleIndices.removeAt(randI(0, particleIndices.length - 1));
-          new_Particle = particles[index];
+          newParticle = particles[index];
         } else {
           // Create a new particle.
-          new_Particle = _Particle(halfWidth, halfHeight);
-          particles.add(new_Particle);
+          newParticle = _Particle(halfWidth, halfHeight);
+          particles.add(newParticle);
         }
 
-        new_Particle.target.x = x + tx;
-        new_Particle.target.y = y + ty;
-        new_Particle.endColor = pixelColor;
+        newParticle.target.x = x + tx;
+        newParticle.target.y = y + ty;
+        newParticle.endColor = pixelColor;
       }
     }
 
@@ -316,12 +316,12 @@ Vector2 generateRandomPos(
 class _ParticulesPainter extends CustomPainter {
   _ParticulesPainter(
     this.animation,
-    this.all_Particles,
+    this.allParticles,
     this.touchPointer,
   ) : super(repaint: animation);
 
   final Animation<double> animation;
-  final List<_Particle> all_Particles;
+  final List<_Particle> allParticles;
   final _TouchPointer touchPointer;
 
   @override
@@ -329,8 +329,8 @@ class _ParticulesPainter extends CustomPainter {
     final width = size.width;
     final height = size.height;
 
-    for (var i = all_Particles.length - 1; i >= 0; i--) {
-      final particle = all_Particles[i];
+    for (var i = allParticles.length - 1; i >= 0; i--) {
+      final particle = allParticles[i];
       particle.move(touchPointer.offset);
 
       final color = particle.currentColor;
@@ -358,7 +358,7 @@ class _ParticulesPainter extends CustomPainter {
             particle.pos.x > width ||
             particle.pos.y < 0 ||
             particle.pos.y > height) {
-          all_Particles.removeAt(i);
+          allParticles.removeAt(i);
         }
       }
     }
