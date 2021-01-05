@@ -130,6 +130,6 @@ Apache 2.0
 
 ## Credits
 ----------------------------------------------------------
-This package was made with code open-sourced by the following awesome devs.
+This package was made possible with code open-sourced by these awesome devs:
 * [Romain Rastel](https://github.com/letsar) 🌟🌟🌟
 * [Mahmoud Ashour](https://github.com/MeitanteiAshour) 🌟
