@@ -9,9 +9,9 @@ import 'common.dart';
 
 class CircleWaveCounter {
   CircleWaveCounter(
-      {@required TickerProvider vsync,
-      @required List<Color> initialColors,
-      @required int initialCounter,
+      {required TickerProvider vsync,
+      required List<Color> initialColors,
+      required int initialCounter,
       BlendMode blend = BlendMode.hardLight}) {
     _counter = initialCounter;
     _colors = initialColors;
@@ -29,31 +29,31 @@ class CircleWaveCounter {
     _addPointAnimation =
         _addPointController.drive(CurveTween(curve: Curves.ease));
 
-    for (int i = 0; i < _counter; i++) {
+    for (int i = 0; i < _counter!; i++) {
       _addPointController.forward(from: 0);
     }
   }
 
-  List<Color> _colors;
-  AnimationController _controller;
-  AnimationController _addPointController;
-  Animation<double> _addPointAnimation;
-  int _counter;
-  BlendMode _blend;
+  late List<Color> _colors;
+  AnimationController? _controller;
+  late AnimationController _addPointController;
+  Animation<double>? _addPointAnimation;
+  int? _counter;
+  BlendMode? _blend;
 
   void incrementCounter() {
-    _counter++;
+    _counter = _counter! + 1;
     _addPointController.forward(from: 0);
   }
 
   void decrementCounter() {
-    if (_counter > 0) {
-      _counter--;
+    if (_counter! > 0) {
+      _counter = _counter! - 1;
       _addPointController.forward(from: 0);
     }
   }
 
-  int getCounter() {
+  int? getCounter() {
     return _counter;
   }
 
@@ -94,12 +94,12 @@ class _CircleWavePainter extends CustomPainter {
     this.count,
     this.blend,
   ) : super(repaint: animation);
-  final Animation<double> animation;
-  final Animation<double> addAnimation;
+  final Animation<double>? animation;
+  final Animation<double>? addAnimation;
   final int index;
   final Color color;
-  final int count;
-  final BlendMode blend;
+  final int? count;
+  final BlendMode? blend;
 
   static const halfPi = math.pi / 2;
   static const twoPi = math.pi * 2;
@@ -107,13 +107,13 @@ class _CircleWavePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final t = animation.value;
+    final t = animation!.value;
     final halfWidth = size.width / 2;
     final halfHeight = size.height / 2;
     final q = index * halfPi;
 
-    List<Offset> computeOffsets(int length) {
-      final offsets = <Offset>[];
+    List<Offset?> computeOffsets(int length) {
+      final offsets = <Offset?>[];
       for (var i = 0; i < length; i++) {
         final th = i * twoPi / length;
         double os = map(math.cos(th - twoPi * t), -1, 1, 0, 1);
@@ -125,26 +125,26 @@ class _CircleWavePainter extends CustomPainter {
       return offsets;
     }
 
-    final offsets = computeOffsets(count);
+    final offsets = computeOffsets(count!);
 
-    if (count > 1 && addAnimation.value < 1) {
-      final t = addAnimation.value;
-      final oldOffsets = computeOffsets(count - 1);
-      for (var i = 0; i < count - 1; i++) {
+    if (count! > 1 && addAnimation!.value < 1) {
+      final t = addAnimation!.value;
+      final oldOffsets = computeOffsets(count! - 1);
+      for (var i = 0; i < count! - 1; i++) {
         offsets[i] = Offset.lerp(oldOffsets[i], offsets[i], t);
       }
-      offsets[count - 1] = Offset.lerp(
-        oldOffsets[count - 2],
-        offsets[count - 1],
+      offsets[count! - 1] = Offset.lerp(
+        oldOffsets[count! - 2],
+        offsets[count! - 1],
         t,
       );
     }
 
-    final path = Path()..addPolygon(offsets, true);
+    final path = Path()..addPolygon(offsets as List<Offset>, true);
     canvas.drawPath(
       path,
       Paint()
-        ..blendMode = blend
+        ..blendMode = blend!
         ..color = color
         ..strokeWidth = 8
         ..style = PaintingStyle.stroke,

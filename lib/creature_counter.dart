@@ -9,9 +9,9 @@ import 'common.dart';
 
 class CreatureCounter {
   CreatureCounter(
-      {@required TickerProvider vsync,
-      @required List<Color> initialColors,
-      @required int initialCounter,
+      {required TickerProvider vsync,
+      required List<Color> initialColors,
+      required int initialCounter,
       BlendMode blend = BlendMode.hardLight}) {
     _counter = initialCounter;
     _colors = initialColors;
@@ -30,34 +30,34 @@ class CreatureCounter {
         _addPointController.drive(CurveTween(curve: Curves.ease));
   }
 
-  List<Color> _colors;
-  int _counter;
-  BlendMode _blend;
+  late List<Color> _colors;
+  int? _counter;
+  BlendMode? _blend;
 
-  AnimationController _controller;
-  AnimationController _addPointController;
-  Animation<double> _addPointAnimation;
+  AnimationController? _controller;
+  late AnimationController _addPointController;
+  Animation<double>? _addPointAnimation;
 
   void incrementCounter() {
-    _counter++;
+    _counter = _counter! + 1;
     _addPointController.forward(from: 0);
   }
 
   void decrementCounter() {
-    if (_counter > 0) {
-      _counter--;
+    if (_counter! > 0) {
+      _counter = _counter! - 1;
       _addPointController.forward(from: 0);
     }
   }
 
-  int getCounter() {
+  int? getCounter() {
     return _counter;
   }
 
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        for (int i = 0; i < _counter; i++)
+        for (int i = 0; i < _counter!; i++)
           Positioned.fill(
             child: TweenAnimationBuilder(
               tween: Tween<double>(begin: 0, end: 1),
@@ -91,31 +91,33 @@ class _CreaturePainter extends CustomPainter {
     this.count,
     this.blend,
   ) : super(repaint: animation);
-  final Animation<double> animation;
-  final Animation<double> addAnimation;
+  final Animation<double>? animation;
+  final Animation<double>? addAnimation;
   final int index;
   final Color color;
-  final int count;
-  final BlendMode blend;
+  final int? count;
+  final BlendMode? blend;
 
   static const twoPi = math.pi * 2;
   final n = 300;
 
   @override
   void paint(Canvas canvas, Size size) {
-    final t = animation.value;
+    final t = animation!.value;
     final halfWidth = size.width / 2;
     final halfHeight = size.height / 2;
-    final q = twoPi * index / count;
+    final q = twoPi * index / count!;
     canvas.translate(halfWidth, halfHeight);
-    if (index > 0 && count > 2) {
-      canvas.rotate(
-          twoPi * (index / (count - 1)) * (count - addAnimation.value) / count);
+    if (index > 0 && count! > 2) {
+      canvas.rotate(twoPi *
+          (index / (count! - 1)) *
+          (count! - addAnimation!.value) /
+          count!);
     } else {
       canvas.rotate(q);
     }
 
-    List<Offset> computeOffsets(int length) {
+    List<Offset> computeOffsets(int? length) {
       final offsets = <Offset>[];
       for (var i = 0; i < n; i++) {
         final qq = i / (n - 1);
@@ -138,7 +140,7 @@ class _CreaturePainter extends CustomPainter {
     canvas.drawPath(
       path,
       Paint()
-        ..blendMode = blend
+        ..blendMode = blend!
         ..color = color
         ..strokeWidth = 5
         ..style = PaintingStyle.stroke

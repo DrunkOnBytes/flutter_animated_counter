@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 class ImageBubbleCounter {
-  ImageBubbleCounter({@required int initialCounter, @required String image}) {
+  ImageBubbleCounter({required int initialCounter, required String image}) {
     _counter = initialCounter;
     _image = image;
-    for (int i = 0; i < _counter; i++) {
+    for (int i = 0; i < _counter!; i++) {
       _bubbles.add(_ImageBubble(
         center: Offset(_random.nextDouble(), _random.nextDouble()),
         radius: (_random.nextInt(50) + 20).toDouble(),
@@ -16,14 +16,14 @@ class ImageBubbleCounter {
     }
   }
 
-  int _counter;
-  String _image;
+  int? _counter;
+  String? _image;
 
   final Random _random = Random();
   final List<_ImageBubble> _bubbles = <_ImageBubble>[];
 
   void incrementCounter() {
-    _counter++;
+    _counter = _counter! + 1;
     _bubbles.add(_ImageBubble(
       center: Offset(_random.nextDouble(), _random.nextDouble()),
       radius: (_random.nextInt(50) + 20).toDouble(),
@@ -32,13 +32,13 @@ class ImageBubbleCounter {
   }
 
   void decrementCounter() {
-    if (_counter > 0) {
-      _counter--;
+    if (_counter! > 0) {
+      _counter = _counter! - 1;
       _bubbles.removeLast();
     }
   }
 
-  int getCounter() {
+  int? getCounter() {
     return _counter;
   }
 
@@ -53,15 +53,15 @@ class ImageBubbleCounter {
 
 class _ImageBubble extends StatefulWidget {
   const _ImageBubble({
-    Key key,
-    @required this.center,
-    @required this.radius,
-    @required this.image,
+    Key? key,
+    required this.center,
+    required this.radius,
+    required this.image,
   }) : super(key: key);
 
   final Offset center;
   final double radius;
-  final String image;
+  final String? image;
 
   @override
   __ImageBubbleState createState() => __ImageBubbleState();
@@ -69,10 +69,10 @@ class _ImageBubble extends StatefulWidget {
 
 class __ImageBubbleState extends State<_ImageBubble>
     with TickerProviderStateMixin {
-  AnimationController centerController;
-  AnimationController radiusController;
-  Animation<Offset> center;
-  Animation<double> radius;
+  late AnimationController centerController;
+  late AnimationController radiusController;
+  late Animation<Offset> center;
+  late Animation<double> radius;
 
   @override
   void initState() {
@@ -119,7 +119,7 @@ class __ImageBubbleState extends State<_ImageBubble>
           );
         },
         child: Image.asset(
-          widget.image,
+          widget.image!,
           fit: BoxFit.cover,
         ),
       ),

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class DisksCounter {
   DisksCounter(
-      {@required int initialCounter,
+      {required int initialCounter,
       Color color = Colors.white,
       BlendMode blend = BlendMode.difference}) {
     _counter = initialCounter;
@@ -13,28 +13,28 @@ class DisksCounter {
   }
 
   final Random _random = Random();
-  int _counter;
-  Color _color;
-  BlendMode _blend;
+  int? _counter;
+  Color? _color;
+  BlendMode? _blend;
 
   void incrementCounter() {
-    _counter++;
+    _counter = _counter! + 1;
   }
 
   void decrementCounter() {
-    if (_counter > 0) {
-      _counter--;
+    if (_counter! > 0) {
+      _counter = _counter! - 1;
     }
   }
 
-  int getCounter() {
+  int? getCounter() {
     return _counter;
   }
 
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        for (int i = 0; i < _counter; i++)
+        for (int i = 0; i < _counter!; i++)
           Positioned.fill(
             child: _Disk(
               random: _random,
@@ -49,24 +49,24 @@ class DisksCounter {
 
 class _Disk extends StatefulWidget {
   const _Disk({
-    Key key,
+    Key? key,
     this.color,
     this.blend,
-    @required this.random,
+    required this.random,
   }) : super(key: key);
 
   final Random random;
-  final Color color;
-  final BlendMode blend;
+  final Color? color;
+  final BlendMode? blend;
 
   @override
   __DiskState createState() => __DiskState();
 }
 
 class __DiskState extends State<_Disk> with SingleTickerProviderStateMixin {
-  AnimationController controller;
-  double radius;
-  CenterTween centerTween;
+  AnimationController? controller;
+  double? radius;
+  CenterTween? centerTween;
 
   @override
   void initState() {
@@ -93,7 +93,7 @@ class __DiskState extends State<_Disk> with SingleTickerProviderStateMixin {
 
   @override
   void dispose() {
-    controller.dispose();
+    controller!.dispose();
     super.dispose();
   }
 
@@ -137,36 +137,36 @@ class _DiskPainter extends CustomPainter {
     this.blend,
   ) : super(repaint: animation);
 
-  final Animation<double> animation;
+  final Animation<double>? animation;
   final double radius;
-  final CenterTween centerTween;
-  final Color color;
-  final BlendMode blend;
+  final CenterTween? centerTween;
+  final Color? color;
+  final BlendMode? blend;
 
   @override
   void paint(Canvas canvas, Size size) {
-    final ratioCenter = centerTween.evaluate(animation);
+    final Offset ratioCenter = centerTween!.evaluate(animation!);
     final center = Offset(
       ratioCenter.dx * size.width,
       ratioCenter.dy * size.height,
     );
     final translation = Offset(
-      centerTween.translation.dx * size.width,
-      centerTween.translation.dy * size.height,
+      centerTween!.translation.dx * size.width,
+      centerTween!.translation.dy * size.height,
     );
     canvas.drawCircle(
       center,
       radius,
       Paint()
-        ..color = color
-        ..blendMode = blend,
+        ..color = color!
+        ..blendMode = blend!,
     );
     canvas.drawCircle(
       center + translation,
       radius,
       Paint()
-        ..color = color
-        ..blendMode = blend,
+        ..color = color!
+        ..blendMode = blend!,
     );
   }
 

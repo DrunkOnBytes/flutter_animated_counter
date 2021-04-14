@@ -1,3 +1,3 @@
-## [0.0.7] - 2020-12-26
+## [1.0.0] - 2020-04-15
 
-* Added initial release.
+* Added support for Null-Safety.

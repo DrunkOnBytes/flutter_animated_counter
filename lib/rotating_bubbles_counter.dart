@@ -5,37 +5,37 @@ import 'package:flutter/material.dart';
 
 class RotatingBubblesCounter {
   RotatingBubblesCounter(
-      {@required List<Color> initialColors,
-      @required int initialCounter,
+      {required List<Color> initialColors,
+      required int initialCounter,
       BlendMode blend = BlendMode.hardLight}) {
     _counter = initialCounter;
     _colors = initialColors;
     _blend = blend;
 
-    for (int i = 0; i < _counter; i++) {
+    for (int i = 0; i < _counter!; i++) {
       _radii.add(_random.nextInt(25) + 12.5);
     }
   }
 
-  List<Color> _colors;
-  int _counter;
-  BlendMode _blend;
+  late List<Color> _colors;
+  int? _counter;
+  BlendMode? _blend;
   final math.Random _random = math.Random();
   final List<double> _radii = <double>[];
 
   void incrementCounter() {
-    _counter++;
+    _counter = _counter! + 1;
     _radii.add(_random.nextInt(25) + 12.5);
   }
 
   void decrementCounter() {
-    if (_counter > 0) {
-      _counter--;
+    if (_counter! > 0) {
+      _counter = _counter! - 1;
       _radii.removeLast();
     }
   }
 
-  int getCounter() {
+  int? getCounter() {
     return _counter;
   }
 
@@ -65,17 +65,17 @@ class RotatingBubblesCounter {
 
 class _RotatingBubble extends StatefulWidget {
   const _RotatingBubble({
-    Key key,
-    @required this.random,
-    @required this.radius,
-    @required this.color,
-    @required this.blend,
+    Key? key,
+    required this.random,
+    required this.radius,
+    required this.color,
+    required this.blend,
   }) : super(key: key);
 
   final math.Random random;
   final double radius;
   final Color color;
-  final BlendMode blend;
+  final BlendMode? blend;
 
   @override
   __RotatingBubbleState createState() => __RotatingBubbleState();
@@ -83,9 +83,9 @@ class _RotatingBubble extends StatefulWidget {
 
 class __RotatingBubbleState extends State<_RotatingBubble>
     with SingleTickerProviderStateMixin {
-  AnimationController controller;
-  Animation<double> angle;
-  double shift;
+  late AnimationController controller;
+  Animation<double>? angle;
+  double? shift;
 
   static const double twoPi = math.pi * 2;
 
@@ -128,23 +128,23 @@ class _RotatingBubblePainter extends CustomPainter {
     this.blend,
   ) : super(repaint: angle);
 
-  final Animation<double> angle;
-  final double shift;
+  final Animation<double>? angle;
+  final double? shift;
   final double radius;
   final Color color;
-  final BlendMode blend;
+  final BlendMode? blend;
 
   @override
   void paint(Canvas canvas, Size size) {
     final appCenter = size.center(Offset.zero);
     final bigRadius = size.width / 2.7;
     final center =
-        (Offset.fromDirection(angle.value, bigRadius * shift)) + appCenter;
+        (Offset.fromDirection(angle!.value, bigRadius * shift!)) + appCenter;
     canvas.drawCircle(
       center,
       radius,
       Paint()
-        ..blendMode = blend
+        ..blendMode = blend!
         ..color = color,
     );
   }

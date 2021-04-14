@@ -3,25 +3,25 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 class WaveCounter {
-  WaveCounter({@required int initialCounter, Color color = Colors.black}) {
+  WaveCounter({required int initialCounter, Color color = Colors.black}) {
     _counter = initialCounter;
     _color = color;
   }
 
-  int _counter;
-  Color _color;
+  int? _counter;
+  Color? _color;
 
   void incrementCounter() {
-    _counter++;
+    _counter = _counter! + 1;
   }
 
   void decrementCounter() {
-    if (_counter > 0) {
-      _counter--;
+    if (_counter! > 0) {
+      _counter = _counter! - 1;
     }
   }
 
-  int getCounter() {
+  int? getCounter() {
     return _counter;
   }
 
@@ -30,7 +30,7 @@ class WaveCounter {
       children: [
         Positioned.fill(
           child: TweenAnimationBuilder(
-            tween: Tween<double>(begin: 0, end: _counter.toDouble()),
+            tween: Tween<double>(begin: 0, end: _counter!.toDouble()),
             duration: const Duration(milliseconds: 1000),
             curve: Curves.bounceOut,
             builder: (_, double ratio, __) {
@@ -53,8 +53,8 @@ class WaveCounter {
 
 class _Wave extends StatefulWidget {
   const _Wave({
-    Key key,
-    @required this.child,
+    Key? key,
+    required this.child,
   }) : super(key: key);
 
   final Widget child;
@@ -64,8 +64,8 @@ class _Wave extends StatefulWidget {
 }
 
 class __WaveState extends State<_Wave> with SingleTickerProviderStateMixin {
-  AnimationController controller;
-  Animation<List<Offset>> waves;
+  late AnimationController controller;
+  Animation<List<Offset>>? waves;
 
   @override
   void initState() {
@@ -121,12 +121,12 @@ class _WaveTween extends Animatable<List<Offset>> {
 class _WaveClipper extends CustomClipper<Path> {
   _WaveClipper(this.waves) : super(reclip: waves);
 
-  Animation<List<Offset>> waves;
+  Animation<List<Offset>>? waves;
 
   @override
   Path getClip(Size size) {
     final width = size.width;
-    final points = waves.value.map((o) => Offset(o.dx * width, o.dy)).toList();
+    final points = waves!.value.map((o) => Offset(o.dx * width, o.dy)).toList();
     return Path()
       ..addPolygon(points, false)
       ..lineTo(size.width, size.height)
@@ -140,7 +140,7 @@ class _WaveClipper extends CustomClipper<Path> {
 
 class DifferenceMask extends StatelessWidget {
   const DifferenceMask({
-    Key key,
+    Key? key,
     this.color,
   }) : super(key: key);
 
@@ -154,7 +154,7 @@ class DifferenceMask extends StatelessWidget {
 }
 
 class DifferencePainter extends CustomPainter {
-  const DifferencePainter({@required this.color}) : super();
+  const DifferencePainter({required this.color}) : super();
 
   final color;
   @override

@@ -10,7 +10,7 @@ import 'common.dart';
 
 class VolcanoCounter {
   VolcanoCounter(
-      {@required int initialCounter,
+      {required int initialCounter,
       bool enableSky = false,
       bool enableGrass = false}) {
     _counter = initialCounter;
@@ -18,21 +18,21 @@ class VolcanoCounter {
     _enableSky = enableSky;
   }
 
-  int _counter;
-  bool _enableSky;
-  bool _enableGrass;
+  int? _counter;
+  late bool _enableSky;
+  late bool _enableGrass;
 
   void incrementCounter() {
-    _counter++;
+    _counter = _counter! + 1;
   }
 
   void decrementCounter() {
-    if (_counter > 0) {
-      _counter--;
+    if (_counter! > 0) {
+      _counter = _counter! - 1;
     }
   }
 
-  int getCounter() {
+  int? getCounter() {
     return _counter;
   }
 
@@ -41,7 +41,7 @@ class VolcanoCounter {
       fit: StackFit.expand,
       children: [
         if (_enableSky) const Sky(),
-        for (int i = 0; i < _counter; i++) _Eruption(count: i + 1),
+        for (int i = 0; i < _counter!; i++) _Eruption(count: i + 1),
         Volcano(),
         if (_enableGrass) const Grass(),
       ],
@@ -56,20 +56,20 @@ class LavaParticle {
     this.initialPosition,
   });
 
-  final double mass;
-  final Offset initialVelocity;
-  final Offset initialPosition;
-  Offset velocity;
-  Offset position;
+  final double? mass;
+  final Offset? initialVelocity;
+  final Offset? initialPosition;
+  late Offset velocity;
+  Offset? position;
 }
 
 class _Eruption extends StatefulWidget {
   const _Eruption({
-    Key key,
+    Key? key,
     this.count,
   }) : super(key: key);
 
-  final int count;
+  final int? count;
 
   @override
   _EruptionState createState() => _EruptionState();
@@ -79,13 +79,13 @@ class _EruptionState extends State<_Eruption>
     with SingleTickerProviderStateMixin {
   final math.Random random = math.Random();
   final List<LavaParticle> particles = <LavaParticle>[];
-  AnimationController controller;
+  AnimationController? controller;
 
   @override
   void initState() {
     super.initState();
 
-    for (var i = 0; i < widget.count; i++) {
+    for (var i = 0; i < widget.count!; i++) {
       final mass = map(random.nextDouble(), 0, 1, 3, 6);
       final velocityX = map(random.nextDouble(), 0, 1, -10, 10);
       final velocityY = map(random.nextDouble(), 0, 1, -200, -50);
@@ -107,7 +107,7 @@ class _EruptionState extends State<_Eruption>
 
   @override
   void dispose() {
-    controller.dispose();
+    controller!.dispose();
     super.dispose();
   }
 
@@ -129,7 +129,7 @@ class _EruptionPainter extends CustomPainter {
       : random = math.Random(),
         super(repaint: animation);
 
-  final Animation<double> animation;
+  final Animation<double>? animation;
   final List<LavaParticle> particles;
   final math.Random random;
   double dt = 0.1;
@@ -140,34 +140,34 @@ class _EruptionPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final opacity = 1 - animation.value;
+    final opacity = 1 - animation!.value;
     final count = particles.length;
-    final color = colorTween.transform(animation.value);
+    final color = colorTween.transform(animation!.value);
 
     for (int i = 0; i < count; i++) {
       final particle = particles[i];
-      final radius = particle.mass * 3;
+      final radius = particle.mass! * 3;
 
       if (particle.position == null || opacity == 1) {
-        final position = particle.initialPosition;
+        final position = particle.initialPosition!;
         particle.position = Offset(
           position.dx * size.width,
           position.dy * size.height,
         );
         particle.velocity = Offset(
-          particle.initialVelocity.dx,
-          particle.initialVelocity.dy,
+          particle.initialVelocity!.dx,
+          particle.initialVelocity!.dy,
         );
       }
 
-      final Offset force = Offset(0, particle.mass * 9.81);
-      final Offset acceleration = force / particle.mass;
+      final Offset force = Offset(0, particle.mass! * 9.81);
+      final Offset acceleration = force / particle.mass!;
       particle.velocity += acceleration * dt;
-      particle.position += particle.velocity * dt;
+      particle.position = particle.position! + particle.velocity * dt;
       canvas.drawCircle(
-        particle.position,
+        particle.position!,
         radius,
-        Paint()..color = color,
+        Paint()..color = color!,
       );
     }
   }
@@ -180,11 +180,11 @@ class _EruptionPainter extends CustomPainter {
 
 class Counter extends StatelessWidget {
   const Counter({
-    Key key,
+    Key? key,
     this.count,
   }) : super(key: key);
 
-  final int count;
+  final int? count;
 
   @override
   Widget build(BuildContext context) {
@@ -197,7 +197,7 @@ class Counter extends StatelessWidget {
         textAlign: TextAlign.center,
         style: Theme.of(context)
             .textTheme
-            .headline1
+            .headline1!
             .copyWith(foreground: Paint()..color = Colors.white),
       ),
     );
@@ -206,7 +206,7 @@ class Counter extends StatelessWidget {
 
 class Sky extends StatefulWidget {
   const Sky({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -214,10 +214,10 @@ class Sky extends StatefulWidget {
 }
 
 class _SkyState extends State<Sky> with TickerProviderStateMixin {
-  AnimationController skyController;
-  AnimationController sunController;
-  Animation<double> sunAnimation;
-  Animation<Color> skyAnimation;
+  late AnimationController skyController;
+  late AnimationController sunController;
+  Animation<double>? sunAnimation;
+  Animation<Color?>? skyAnimation;
 
   @override
   void initState() {
@@ -261,8 +261,8 @@ class SkyPainter extends CustomPainter {
   const SkyPainter(this.skyAnimation, this.sunAnimation)
       : super(repaint: skyAnimation);
 
-  final Animation<Color> skyAnimation;
-  final Animation<double> sunAnimation;
+  final Animation<Color?>? skyAnimation;
+  final Animation<double>? sunAnimation;
 
   static const sunColor = Color(0xFFFFC471);
   static const moonColor = Color(0xFFFFFFFF);
@@ -272,14 +272,14 @@ class SkyPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     // Sky color.
-    canvas.drawColor(skyAnimation.value, BlendMode.src);
+    canvas.drawColor(skyAnimation!.value!, BlendMode.src);
 
     final halfWidth = size.width / 2;
     final distance = 2 / 4 * size.height;
 
     // Sun.
     final sunCenter = Offset.fromDirection(
-          sunAnimation.value,
+          sunAnimation!.value,
           distance,
         ) +
         Offset(halfWidth, size.height);
@@ -293,7 +293,7 @@ class SkyPainter extends CustomPainter {
 
     // Moon.
     final moonCenter = Offset.fromDirection(
-          sunAnimation.value + math.pi,
+          sunAnimation!.value + math.pi,
           distance,
         ) +
         Offset(halfWidth, size.height);
@@ -315,7 +315,7 @@ class SkyPainter extends CustomPainter {
 
 class Volcano extends StatelessWidget {
   const Volcano({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -332,7 +332,7 @@ class Volcano extends StatelessWidget {
 
 class Grass extends StatelessWidget {
   const Grass({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

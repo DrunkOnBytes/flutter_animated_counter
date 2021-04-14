@@ -18,25 +18,25 @@ const touchSize = 100;
 
 class ParticlesCounter {
   ParticlesCounter(
-      {@required int initialCounter, @required List<String> images}) {
+      {required int initialCounter, required List<String> images}) {
     _counter = initialCounter;
     _images = images;
   }
 
-  int _counter;
-  List<String> _images;
+  int? _counter;
+  List<String>? _images;
 
   void incrementCounter() {
-    _counter++;
+    _counter = _counter! + 1;
   }
 
   void decrementCounter() {
-    if (_counter > 0) {
-      _counter--;
+    if (_counter! > 0) {
+      _counter = _counter! - 1;
     }
   }
 
-  int getCounter() {
+  int? getCounter() {
     return _counter;
   }
 
@@ -50,7 +50,7 @@ class ParticlesCounter {
             builder: (_, constraints) {
               return __ParticleImageSwitcher(
                 imagePaths: _images,
-                imageIndex: _counter % 46,
+                imageIndex: _counter! % 46,
                 size: constraints.biggest,
               );
             },
@@ -62,14 +62,14 @@ class ParticlesCounter {
 }
 
 class _TouchPointer {
-  Offset offset;
+  Offset? offset;
 }
 
 class _TouchDetector extends StatelessWidget {
   const _TouchDetector({
-    Key key,
-    @required this.touchPointer,
-    @required this.child,
+    Key? key,
+    required this.touchPointer,
+    required this.child,
   }) : super(key: key);
 
   final _TouchPointer touchPointer;
@@ -89,13 +89,13 @@ class _TouchDetector extends StatelessWidget {
 
 class __ParticleImageSwitcher extends StatefulWidget {
   const __ParticleImageSwitcher({
-    Key key,
-    @required this.imagePaths,
-    @required this.imageIndex,
-    @required this.size,
+    Key? key,
+    required this.imagePaths,
+    required this.imageIndex,
+    required this.size,
   }) : super(key: key);
 
-  final List<String> imagePaths;
+  final List<String>? imagePaths;
   final int imageIndex;
   final Size size;
 
@@ -110,7 +110,7 @@ class ___ParticleImageSwitcherState extends State<__ParticleImageSwitcher>
   final List<Future<Pixels>> allPixels = <Future<Pixels>>[];
   final List<VoidCallback> onDispose = <VoidCallback>[];
   final _TouchPointer touchPointer = _TouchPointer();
-  AnimationController controller;
+  AnimationController? controller;
 
   @override
   void initState() {
@@ -118,8 +118,8 @@ class ___ParticleImageSwitcherState extends State<__ParticleImageSwitcher>
     controller =
         AnimationController(vsync: this, duration: const Duration(seconds: 1))
           ..repeat();
-    for (var i = 0; i < widget.imagePaths.length; i++) {
-      allPixels.add(loadPixels(widget.imagePaths[i]));
+    for (var i = 0; i < widget.imagePaths!.length; i++) {
+      allPixels.add(loadPixels(widget.imagePaths![i]));
     }
     showParticles(0);
   }
@@ -134,7 +134,7 @@ class ___ParticleImageSwitcherState extends State<__ParticleImageSwitcher>
 
   @override
   void dispose() {
-    controller.dispose();
+    controller!.dispose();
     onDispose.forEach((x) => x());
     super.dispose();
   }
@@ -143,7 +143,7 @@ class ___ParticleImageSwitcherState extends State<__ParticleImageSwitcher>
     final provider = ExactAssetImage(imagePath);
     final imageStream = provider.resolve(ImageConfiguration.empty);
     final completer = Completer<ui.Image>();
-    ImageStreamListener imageStreamListener;
+    late ImageStreamListener imageStreamListener;
     imageStreamListener = ImageStreamListener((frame, _) {
       completer.complete(frame.image);
       imageStream.removeListener(imageStreamListener);
@@ -236,12 +236,12 @@ class _Particle {
   Vector2 acc = Vector2.zero();
   Vector2 target = Vector2.zero();
   bool isKilled = false;
-  Color currentColor = const Color(0x00000000);
+  Color? currentColor = const Color(0x00000000);
   Color endColor = const Color(0x00000000);
-  double currentSize = 0;
+  double? currentSize = 0;
   double distToTarget = 0;
 
-  void move([Offset touchPosition]) {
+  void move([Offset? touchPosition]) {
     distToTarget = pos.distanceTo(target);
 
     double proximityMult;
@@ -320,7 +320,7 @@ class _ParticulesPainter extends CustomPainter {
     this.touchPointer,
   ) : super(repaint: animation);
 
-  final Animation<double> animation;
+  final Animation<double>? animation;
   final List<_Particle> allParticles;
   final _TouchPointer touchPointer;
 
@@ -333,7 +333,7 @@ class _ParticulesPainter extends CustomPainter {
       final particle = allParticles[i];
       particle.move(touchPointer.offset);
 
-      final color = particle.currentColor;
+      final color = particle.currentColor!;
       particle.currentColor = Color.lerp(
           particle.currentColor, particle.endColor, particle.colorBlendRate);
       double targetSize = 2;
@@ -351,7 +351,7 @@ class _ParticulesPainter extends CustomPainter {
           ui.lerpDouble(particle.currentSize, targetSize, 0.1);
 
       final center = Offset(particle.pos.x, particle.pos.y);
-      canvas.drawCircle(center, particle.currentSize, Paint()..color = color);
+      canvas.drawCircle(center, particle.currentSize!, Paint()..color = color);
 
       if (particle.isKilled) {
         if (particle.pos.x < 0 ||

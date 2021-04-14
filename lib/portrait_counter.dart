@@ -10,24 +10,24 @@ import 'package:flutter/services.dart';
 import 'common.dart';
 
 class PortraitCounter {
-  PortraitCounter({@required int initialCounter, @required String image}) {
+  PortraitCounter({required int initialCounter, required String image}) {
     _counter = initialCounter;
     _image = image;
   }
 
-  int _counter;
-  String _image;
+  int? _counter;
+  String? _image;
   void incrementCounter() {
-    _counter++;
+    _counter = _counter! + 1;
   }
 
   void decrementCounter() {
-    if (_counter > 0) {
-      _counter--;
+    if (_counter! > 0) {
+      _counter = _counter! - 1;
     }
   }
 
-  int getCounter() {
+  int? getCounter() {
     return _counter;
   }
 
@@ -44,13 +44,13 @@ class PortraitCounter {
 
 class Portrait extends StatefulWidget {
   const Portrait({
-    Key key,
-    @required this.assetName,
-    @required this.counter,
+    Key? key,
+    required this.assetName,
+    required this.counter,
   }) : super(key: key);
 
-  final String assetName;
-  final int counter;
+  final String? assetName;
+  final int? counter;
 
   @override
   _PortraitState createState() => _PortraitState();
@@ -58,8 +58,8 @@ class Portrait extends StatefulWidget {
 
 class _PortraitState extends State<Portrait> {
   final Random random = Random();
-  ui.Image image;
-  ByteData byteData;
+  ui.Image? image;
+  ByteData? byteData;
 
   @override
   void initState() {
@@ -75,17 +75,17 @@ class _PortraitState extends State<Portrait> {
 
   Future<void> loadPixels() async {
     image?.dispose();
-    final provider = ExactAssetImage(widget.assetName);
+    final provider = ExactAssetImage(widget.assetName!);
     final imageStream = provider.resolve(ImageConfiguration.empty);
     final completer = Completer<ui.Image>();
-    ImageStreamListener imageStreamListener;
+    late ImageStreamListener imageStreamListener;
     imageStreamListener = ImageStreamListener((frame, _) {
       completer.complete(frame.image);
       imageStream.removeListener(imageStreamListener);
     });
     imageStream.addListener(imageStreamListener);
     image = await completer.future;
-    byteData = await image.toByteData(format: ui.ImageByteFormat.rawRgba);
+    byteData = await image!.toByteData(format: ui.ImageByteFormat.rawRgba);
     setState(() {});
   }
 
@@ -96,10 +96,10 @@ class _PortraitState extends State<Portrait> {
         : Stack(
             fit: StackFit.expand,
             children: [
-              for (var i = 0; i < widget.counter; i++)
+              for (var i = 0; i < widget.counter!; i++)
                 _PortaitPaint(
-                  imgWidth: image.width,
-                  imgHeight: image.height,
+                  imgWidth: image!.width,
+                  imgHeight: image!.height,
                   byteData: byteData,
                   random: random,
                   counter: i,
@@ -112,17 +112,17 @@ class _PortraitState extends State<Portrait> {
 
 class _PortaitPaint extends StatelessWidget {
   const _PortaitPaint({
-    Key key,
-    @required this.imgWidth,
-    @required this.imgHeight,
-    @required this.byteData,
-    @required this.random,
-    @required this.counter,
+    Key? key,
+    required this.imgWidth,
+    required this.imgHeight,
+    required this.byteData,
+    required this.random,
+    required this.counter,
   }) : super(key: key);
 
   final int imgWidth;
   final int imgHeight;
-  final ByteData byteData;
+  final ByteData? byteData;
   final Random random;
   final int counter;
 
@@ -146,7 +146,7 @@ class _PortraitPainter extends CustomPainter {
   _PortraitPainter(
     this.imgWidth,
     this.imgHeight,
-    ByteData byteData,
+    ByteData? byteData,
     this.random,
     this.counter,
   ) : pixels = Pixels(byteData: byteData, width: imgWidth, height: imgHeight);

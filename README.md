@@ -26,6 +26,7 @@ Wave                       |        Pixel             |        Disks
 * Ability to increment, decrement and get current counter value.
 * One stop destination for FlutterCounterChallenge2020 widgets.
 * Completely open source.
+* Added support for Null-Safety
 
 ## Supported platforms
 
@@ -42,7 +43,7 @@ Note: This page is built with flutter-web, hence the animations may not be smoot
 
 ## Installation
 
-Add `animated_counter: 0.0.7` to your `pubspec.yaml` dependencies. And import it:
+Add `animated_counter: 1.0.0` to your `pubspec.yaml` dependencies. And import it:
 
 ```dart
 import 'package:collapsible_sidebar/collapsible_sidebar.dart';

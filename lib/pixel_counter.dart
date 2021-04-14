@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 
 class PixelCounter {
-  PixelCounter({@required int initialCounter, Color color = Colors.yellow}) {
+  PixelCounter({required int initialCounter, Color color = Colors.yellow}) {
     _counter = initialCounter;
     _color = color;
   }
   List<int> numberOfBlocks = [];
-  int _counter;
-  Color _color;
+  int? _counter;
+  Color? _color;
 
   void incrementCounter() {
-    _counter++;
+    _counter = _counter! + 1;
   }
 
   void decrementCounter() {
-    if (_counter > 0) {
-      _counter--;
+    if (_counter! > 0) {
+      _counter = _counter! - 1;
     }
   }
 
-  int getCounter() {
+  int? getCounter() {
     return _counter;
   }
 
@@ -74,7 +74,7 @@ class PixelCounter {
                     ),
                   ],
                   border: Border.all(
-                    color: kaza.contains(index) ? _color : Colors.black,
+                    color: kaza.contains(index) ? _color! : Colors.black,
                     width: 0.3,
                     style: BorderStyle.solid,
                   ),

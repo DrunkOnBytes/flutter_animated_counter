@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 
 class BlocksCounter {
   BlocksCounter(
-      {@required int initialCounter,
+      {required int initialCounter,
       Color color = Colors.white,
       BlendMode blend = BlendMode.difference}) {
     _counter = initialCounter;
     _color = color;
     _blend = blend;
-    for (int i = 0; i < _counter; i++) {
+    for (int i = 0; i < _counter!; i++) {
       final dx = _random.nextInt(_blockCount);
       final dy = (_lastIndices[dx] - 1) % _blockCount;
       _lastIndices[dx] = dy;
@@ -21,12 +21,12 @@ class BlocksCounter {
   final Random _random = Random();
   final List<Offset> _indices = <Offset>[];
   final List<int> _lastIndices = List<int>.filled(_blockCount, _blockCount);
-  int _counter;
-  Color _color;
-  BlendMode _blend;
+  int? _counter;
+  Color? _color;
+  BlendMode? _blend;
 
   void incrementCounter() {
-    _counter++;
+    _counter = _counter! + 1;
     final dx = _random.nextInt(_blockCount);
     final dy = (_lastIndices[dx] - 1) % _blockCount;
     _lastIndices[dx] = dy;
@@ -34,13 +34,13 @@ class BlocksCounter {
   }
 
   void decrementCounter() {
-    if (_counter > 0) {
-      _counter--;
+    if (_counter! > 0) {
+      _counter = _counter! - 1;
       _indices.removeLast();
     }
   }
 
-  int getCounter() {
+  int? getCounter() {
     return _counter;
   }
 
@@ -74,32 +74,32 @@ class BlocksCounter {
 
 class _Block extends StatefulWidget {
   const _Block({
-    Key key,
+    Key? key,
     this.blockSize,
     this.endOffset,
     this.color,
     this.blend,
   }) : super(key: key);
 
-  final Size blockSize;
-  final Offset endOffset;
-  final Color color;
-  final BlendMode blend;
+  final Size? blockSize;
+  final Offset? endOffset;
+  final Color? color;
+  final BlendMode? blend;
 
   @override
   __BlockState createState() => __BlockState();
 }
 
 class __BlockState extends State<_Block> with SingleTickerProviderStateMixin {
-  AnimationController controller;
-  Animation<Offset> offset;
+  late AnimationController controller;
+  Animation<Offset>? offset;
 
   @override
   void initState() {
     super.initState();
 
-    final endOffset = widget.endOffset;
-    final blockHeight = widget.blockSize.height;
+    final endOffset = widget.endOffset!;
+    final blockHeight = widget.blockSize!.height;
     final distance = blockHeight + endOffset.dy;
     final duration = (distance * 2).toInt();
 
@@ -143,17 +143,17 @@ class _BlockPainter extends CustomPainter {
     this.blend,
   ) : super(repaint: offset);
 
-  final Animation<Offset> offset;
-  final Size blockSize;
-  final Color color;
-  final BlendMode blend;
+  final Animation<Offset>? offset;
+  final Size? blockSize;
+  final Color? color;
+  final BlendMode? blend;
   @override
   void paint(Canvas canvas, Size size) {
     canvas.drawRect(
-      offset.value & blockSize,
+      offset!.value & blockSize!,
       Paint()
-        ..color = color
-        ..blendMode = blend,
+        ..color = color!
+        ..blendMode = blend!,
     );
   }
 
